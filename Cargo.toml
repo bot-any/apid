@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "apid",
+    "apid-telegram-bot",
+    "apid-discord"
+]
