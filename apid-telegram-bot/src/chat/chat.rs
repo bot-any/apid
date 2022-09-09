@@ -112,12 +112,17 @@ pub struct ChatUser {
     pub bio: Option<String>,
 }
 
+/// The kind of chat
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case", tag = "type")]
 pub enum ChatKind {
+    /// Private chat
     Private,
+    /// Group
     Group,
+    /// Supergroup
     Supergroup,
+    /// Channel
     Channel,
 }
 
