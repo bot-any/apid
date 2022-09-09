@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::{Chat, MessageEntity, Poll, User};
+use crate::{Chat, Dice, MessageEntity, Poll, User};
 
 /// This object represents a message.
 #[derive(Debug, Serialize, Deserialize)]
@@ -100,6 +100,7 @@ pub struct Message {
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum MessageContent {
+    /// Message is a text message
     Text {
         /// For text messages, the actual UTF-8 text of the message
         text: String,
@@ -172,10 +173,8 @@ pub enum MessageContent {
         /// Message is a shared contact, information about the contact
         contact: Contact,
     },
-    Dice {
-        /// Message is a dice with random value
-        dice: Dice,
-    },
+    /// Message is a dice with random value
+    Dice(#[serde(rename = "dice")] Dice),
     Game {
         /// Message is a game, information about the game.
         /// [More about games »](https://core.telegram.org/bots/api#games)
@@ -325,9 +324,6 @@ pub struct Voice {}
 pub struct Contact {}
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct Dice {}
-
-#[derive(Debug, Serialize, Deserialize)]
 pub struct Game {}
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -369,9 +365,10 @@ pub struct WebAppData {}
 #[derive(Debug, Serialize, Deserialize)]
 pub struct InlineKeyboardMarkup {}
 
+/// Caption for the animation, audio, document, photo, video or voice
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Caption {
-    /// Caption for the animation, audio, document, photo, video or voice
+    /// Caption text
     #[serde(rename = "caption")]
     pub text: String,
 
