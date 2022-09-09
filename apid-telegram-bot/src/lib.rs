@@ -10,6 +10,7 @@
 
 #![warn(missing_docs)]
 
+pub use bot::*;
 pub use callback_query::*;
 pub use chat::*;
 pub use chat_join_request::*;
@@ -44,4 +45,5 @@ mod video_chat;
 mod web_app;
 mod webhook_info;
 
+mod bot;
 mod util;
