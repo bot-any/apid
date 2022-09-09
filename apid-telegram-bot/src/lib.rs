@@ -9,6 +9,7 @@ pub use pre_checkout_query::*;
 pub use shipping_query::*;
 pub use update::*;
 pub use user::*;
+pub use webhook_info::*;
 
 mod callback_query;
 mod chat;
@@ -21,5 +22,6 @@ mod pre_checkout_query;
 mod shipping_query;
 mod update;
 mod user;
+mod webhook_info;
 
 mod util;
