@@ -37,7 +37,7 @@ pub enum MessageEntityKind {
     Italic,
     /// <u>underline</u>
     Underline,
-    /// ~strikethrough text~
+    /// ~~strikethrough text~~
     Strikethrough,
     /// spoiler message
     /// <span
