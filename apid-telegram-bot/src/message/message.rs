@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::{Chat, Contact, Dice, MessageEntity, Poll, User};
+use crate::{Chat, Contact, Dice, MessageEntity, Poll, User, WebAppData};
 
 /// This object represents a message.
 #[derive(Debug, Serialize, Deserialize)]
@@ -109,6 +109,7 @@ pub enum MessageContent {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         entities: Vec<MessageEntity>,
     },
+    /// Message is an animation
     Animation {
         /// Message is an animation, information about the animation.
         /// For backward compatibility, when this field is set, the *document* field will also be set
@@ -121,6 +122,7 @@ pub enum MessageContent {
         #[serde(flatten, skip_serializing_if = "Option::is_none")]
         caption: Option<Caption>,
     },
+    /// Message is an audio file
     Audio {
         /// Message is an audio file, information about the file
         audio: Audio,
@@ -129,6 +131,7 @@ pub enum MessageContent {
         #[serde(flatten, skip_serializing_if = "Option::is_none")]
         caption: Option<Caption>,
     },
+    /// Message is a general file
     Document {
         /// Message is a general file, information about the file
         document: Document,
@@ -137,6 +140,7 @@ pub enum MessageContent {
         #[serde(flatten, skip_serializing_if = "Option::is_none")]
         caption: Option<Caption>,
     },
+    /// Message is a photo
     Photo {
         /// Message is a photo, available sizes of the photo
         photo: Vec<PhotoSize>,
@@ -145,10 +149,9 @@ pub enum MessageContent {
         #[serde(flatten, skip_serializing_if = "Option::is_none")]
         caption: Option<Caption>,
     },
-    Sticker {
-        /// Message is a sticker, information about the sticker
-        sticker: Sticker,
-    },
+    /// Message is a sticker
+    Sticker(#[serde(rename = "sticker")] Sticker),
+    /// Message is a video
     Video {
         /// Message is a video, information about the video
         video: Video,
@@ -161,6 +164,7 @@ pub enum MessageContent {
         /// Message is a [video note](https://telegram.org/blog/video-messages-and-telescope), information about the video message
         video_note: VideoNote,
     },
+    /// Message is a voice message
     Voice {
         /// Message is a voice message, information about the file
         voice: Voice,
@@ -169,7 +173,7 @@ pub enum MessageContent {
         #[serde(flatten, skip_serializing_if = "Option::is_none")]
         caption: Option<Caption>,
     },
-    /// Message is a shared contact, information about the contact
+    /// Message is a shared contact
     Contact(#[serde(rename = "contact")] Contact),
     /// Message is a dice with random value
     Dice(#[serde(rename = "dice")] Dice),
@@ -178,7 +182,7 @@ pub enum MessageContent {
         /// [More about games »](https://core.telegram.org/bots/api#games)
         game: Game,
     },
-    /// Message is a native poll, information about the poll
+    /// Message is a native poll
     Poll(#[serde(rename = "poll")] Poll),
     Venue {
         /// Message is a venue, information about the venue.
@@ -351,9 +355,6 @@ pub struct VideoChatEnded {}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct VideoChatParticipantsInvited {}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct WebAppData {}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct InlineKeyboardMarkup {}
