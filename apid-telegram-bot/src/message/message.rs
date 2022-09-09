@@ -160,10 +160,8 @@ pub enum MessageContent {
         #[serde(flatten, skip_serializing_if = "Option::is_none")]
         caption: Option<Caption>,
     },
-    VideoNote {
-        /// Message is a [video note](https://telegram.org/blog/video-messages-and-telescope), information about the video message
-        video_note: VideoNote,
-    },
+    /// Message is a [video note](https://telegram.org/blog/video-messages-and-telescope)
+    VideoNote(#[serde(rename = "video_note")] VideoNote),
     /// Message is a voice message
     Voice {
         /// Message is a voice message, information about the file
