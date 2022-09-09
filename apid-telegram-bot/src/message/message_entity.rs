@@ -6,11 +6,11 @@ use crate::User;
 #[derive(Debug, Serialize, Deserialize)]
 pub struct MessageEntity {
     /// The kind of message entity, and its metadata
-    kind: MessageEntityKind,
+    pub kind: MessageEntityKind,
     /// Offset in UTF-16 code units to the start of the entity
-    offset: i32,
+    pub offset: i32,
     /// Length of the entity in UTF-16 code units
-    length: i32,
+    pub length: i32,
 }
 
 /// This object represents the kind of message entity, and its metadata.
