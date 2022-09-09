@@ -109,6 +109,7 @@ pub enum MessageContent {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         entities: Vec<MessageEntity>,
     },
+
     /// Message is an animation
     Animation {
         /// Message is an animation, information about the animation.
@@ -122,6 +123,7 @@ pub enum MessageContent {
         #[serde(flatten, skip_serializing_if = "Option::is_none")]
         caption: Option<Caption>,
     },
+
     /// Message is an audio file
     Audio {
         /// Message is an audio file, information about the file
@@ -131,6 +133,7 @@ pub enum MessageContent {
         #[serde(flatten, skip_serializing_if = "Option::is_none")]
         caption: Option<Caption>,
     },
+
     /// Message is a general file
     Document {
         /// Message is a general file, information about the file
@@ -140,6 +143,7 @@ pub enum MessageContent {
         #[serde(flatten, skip_serializing_if = "Option::is_none")]
         caption: Option<Caption>,
     },
+
     /// Message is a photo
     Photo {
         /// Message is a photo, available sizes of the photo
@@ -149,8 +153,10 @@ pub enum MessageContent {
         #[serde(flatten, skip_serializing_if = "Option::is_none")]
         caption: Option<Caption>,
     },
+
     /// Message is a sticker
     Sticker(#[serde(rename = "sticker")] Sticker),
+
     /// Message is a video
     Video {
         /// Message is a video, information about the video
@@ -160,8 +166,10 @@ pub enum MessageContent {
         #[serde(flatten, skip_serializing_if = "Option::is_none")]
         caption: Option<Caption>,
     },
+
     /// Message is a [video note](https://telegram.org/blog/video-messages-and-telescope)
     VideoNote(#[serde(rename = "video_note")] VideoNote),
+
     /// Message is a voice message
     Voice {
         /// Message is a voice message, information about the file
@@ -185,42 +193,49 @@ pub enum MessageContent {
     /// Message is a native poll
     Poll(#[serde(rename = "poll")] Poll),
 
+    /// Message is a venue.
     Venue {
         /// Message is a venue, information about the venue.
         /// For backward compatibility, when this field is set, the *location* field will also be set
         venue: Venue,
 
-        /// Message is a shared location, information about the location
+        /// information about the location
         location: Location,
     },
-    Location {
-        /// Message is a shared location, information about the location
-        location: Location,
-    },
+
+    /// Message is a shared location
+    Location(#[serde(rename = "location")] Location),
+
     NewChatMembers {
         /// New members that were added to the group or supergroup and information about them (the bot itself may be one of these members)
         new_chat_members: Vec<User>,
     },
+
     LeftChatMember {
         /// A member was removed from the group, information about them (this member may be the bot itself)
         left_chat_member: User,
     },
+
     NewChatTitle {
         /// A chat title was changed to this value
         new_chat_title: String,
     },
+
     NewChatPhoto {
         /// A chat photo was change to this value
         new_chat_photo: Vec<PhotoSize>,
     },
+
     DeleteChatPhoto {
         /// Service message: the chat photo was deleted
         delete_chat_photo: bool,
     },
+
     GroupChatCreated {
         /// Service message: the group has been created
         group_chat_created: bool,
     },
+
     SupergroupChatCreated {
         /// Service message: the supergroup has been created.
         /// This field can't be received in a message coming through updates,
@@ -228,6 +243,7 @@ pub enum MessageContent {
         /// It can only be found in reply_to_message if someone replies to a very first message in a directly created supergroup.
         supergroup_chat_created: bool,
     },
+
     ChannelChatCreated {
         /// Service message: the channel has been created.
         /// This field can't be received in a message coming through updates,
@@ -235,37 +251,44 @@ pub enum MessageContent {
         /// It can only be found in reply_to_message if someone replies to a very first message in a channel.
         channel_chat_created: bool,
     },
+
     MessageAutoDeleteTimerChanged {
         /// Service message: auto-delete timer settings changed in the chat
         message_auto_delete_timer_changed: MessageAutoDeleteTimerChanged,
     },
+
     MigrateToChatId {
         /// The group has been migrated to a supergroup with the specified identifier.
         /// This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it.
         /// But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.
         migrate_to_chat_id: i64,
     },
+
     MigrateFromChatId {
         /// The supergroup has been migrated from a group with the specified identifier.
         /// This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it.
         /// But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.
         migrate_from_chat_id: i64,
     },
+
     PinnedMessage {
         /// Specified message was pinned.
         /// Note that the Message object in this field will not contain further *reply_to_message* fields even if it is itself a reply.
         pinned_message: Box<Message>,
     },
+
     Invoice {
         /// Message is an invoice for a [payment](https://core.telegram.org/bots/api#payments), information about the invoice.
         /// [More about payments »](https://core.telegram.org/bots/api#payments)
         invoice: Invoice,
     },
+
     SuccessfulPayment {
         /// Message is a service message about a successful payment, information about the payment.
         /// [More about payments »](https://core.telegram.org/bots/api#payments)
         successful_payment: SuccessfulPayment,
     },
+
     Login {
         /// The domain name of the website on which the user has logged in.
         /// [More about Telegram Login »](https://core.telegram.org/widgets/login)
@@ -274,23 +297,28 @@ pub enum MessageContent {
         /// Telegram Passport data
         passport_data: PassportData,
     },
+
     ProximityAlertTriggered {
         /// Service message.
         /// A user in the chat triggered another user's proximity alert while sharing Live Location.
         proximity_alert_triggered: ProximityAlertTriggered,
     },
+
     VideoChatScheduled {
         /// Service message: video chat scheduled
         video_chat_scheduled: VideoChatScheduled,
     },
+
     VideoChatStarted {
         /// Service message: video chat started
         video_chat_started: VideoChatStarted,
     },
+
     VideoChatEnded {
         /// Service message: video chat ended
         video_chat_ended: VideoChatEnded,
     },
+
     VideoChatParticipantsInvited {
         /// Service message: new participants invited to a video chat
         video_chat_participants_invited: VideoChatParticipantsInvited,
