@@ -1,3 +1,11 @@
+//! # apid-telegram-bot
+//!
+//! This crate provides types for Telegram API.
+//! The tpyes implementing [`Debug`], [`Serialize`](serde::Serialize) and [`Deserialize`](serde::Deserialize) traits for covenience.
+//! Also, carefully designed enum variants for ergonomics.
+
+#![warn(missing_docs)]
+
 pub use callback_query::*;
 pub use chat::*;
 pub use chat_join_request::*;

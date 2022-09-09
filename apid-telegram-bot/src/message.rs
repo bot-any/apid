@@ -2,6 +2,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::{Chat, Poll, User};
 
+/// This object represents a message.
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Message {
     /// Unique message identifier inside this chat
@@ -82,18 +83,20 @@ pub struct Message {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub author_signature: Option<String>,
 
+    /// The content of the message
     #[serde(flatten)]
     pub content: MessageContent,
 
     /// Service message: data sent by a Web App
     #[serde(skip_serializing_if = "Option::is_none")]
-    web_app_data: Option<WebAppData>,
+    pub web_app_data: Option<WebAppData>,
 
     /// Inline keyboard attached to the message. `login_url` buttons are represented as ordinary `url` buttons.
     #[serde(skip_serializing_if = "Option::is_none")]
-    reply_markup: Option<InlineKeyboardMarkup>,
+    pub reply_markup: Option<InlineKeyboardMarkup>,
 }
 
+/// The object representing message content
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum MessageContent {
@@ -115,7 +118,7 @@ pub enum MessageContent {
 
         /// Caption for the animation, audio, document, photo, video or voice
         #[serde(flatten, skip_serializing_if = "Option::is_none")]
-        caption: Option<CaptionBundle>,
+        caption: Option<Caption>,
     },
     Audio {
         /// Message is an audio file, information about the file
@@ -123,7 +126,7 @@ pub enum MessageContent {
 
         /// Caption for the animation, audio, document, photo, video or voice
         #[serde(flatten, skip_serializing_if = "Option::is_none")]
-        caption: Option<CaptionBundle>,
+        caption: Option<Caption>,
     },
     Document {
         /// Message is a general file, information about the file
@@ -131,7 +134,7 @@ pub enum MessageContent {
 
         /// Caption for the animation, audio, document, photo, video or voice
         #[serde(flatten, skip_serializing_if = "Option::is_none")]
-        caption: Option<CaptionBundle>,
+        caption: Option<Caption>,
     },
     Photo {
         /// Message is a photo, available sizes of the photo
@@ -139,7 +142,7 @@ pub enum MessageContent {
 
         /// Caption for the animation, audio, document, photo, video or voice
         #[serde(flatten, skip_serializing_if = "Option::is_none")]
-        caption: Option<CaptionBundle>,
+        caption: Option<Caption>,
     },
     Sticker {
         /// Message is a sticker, information about the sticker
@@ -151,7 +154,7 @@ pub enum MessageContent {
 
         /// Caption for the animation, audio, document, photo, video or voice
         #[serde(flatten, skip_serializing_if = "Option::is_none")]
-        caption: Option<CaptionBundle>,
+        caption: Option<Caption>,
     },
     VideoNote {
         /// Message is a [video note](https://telegram.org/blog/video-messages-and-telescope), information about the video message
@@ -163,7 +166,7 @@ pub enum MessageContent {
 
         /// Caption for the animation, audio, document, photo, video or voice
         #[serde(flatten, skip_serializing_if = "Option::is_none")]
-        caption: Option<CaptionBundle>,
+        caption: Option<Caption>,
     },
     Contact {
         /// Message is a shared contact, information about the contact
@@ -370,12 +373,12 @@ pub struct WebAppData {}
 pub struct InlineKeyboardMarkup {}
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct CaptionBundle {
+pub struct Caption {
     /// Caption for the animation, audio, document, photo, video or voice
     #[serde(rename = "caption")]
-    text: String,
+    pub text: String,
 
     /// For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in the caption
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    caption_entities: Vec<MessageEntity>,
+    pub caption_entities: Vec<MessageEntity>,
 }
