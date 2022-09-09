@@ -1,6 +1,9 @@
 use serde::{Deserialize, Serialize};
 
-use crate::{Chat, Contact, Dice, Game, MessageEntity, PhotoSize, Poll, User, WebAppData};
+use crate::{
+    Chat, Contact, Dice, Game, MessageEntity, PhotoSize, Poll, User, VideoChatEnded,
+    VideoChatParticipantsInvited, VideoChatScheduled, VideoChatStarted, WebAppData,
+};
 
 /// This object represents a message.
 #[derive(Debug, Serialize, Deserialize)]
@@ -304,25 +307,19 @@ pub enum MessageContent {
         proximity_alert_triggered: ProximityAlertTriggered,
     },
 
-    VideoChatScheduled {
-        /// Service message: video chat scheduled
-        video_chat_scheduled: VideoChatScheduled,
-    },
+    /// Service message: video chat scheduled
+    VideoChatScheduled(#[serde(rename = "video_chat_scheduled")] VideoChatScheduled),
 
-    VideoChatStarted {
-        /// Service message: video chat started
-        video_chat_started: VideoChatStarted,
-    },
+    /// Service message: video chat started
+    VideoChatStarted(#[serde(rename = "video_chat_started")] VideoChatStarted),
 
-    VideoChatEnded {
-        /// Service message: video chat ended
-        video_chat_ended: VideoChatEnded,
-    },
+    /// Service message: video chat ended
+    VideoChatEnded(#[serde(rename = "video_chat_ended")] VideoChatEnded),
 
-    VideoChatParticipantsInvited {
-        /// Service message: new participants invited to a video chat
-        video_chat_participants_invited: VideoChatParticipantsInvited,
-    },
+    /// Service message: new participants invited to a video chat
+    VideoChatParticipantsInvited(
+        #[serde(rename = "video_chat_participants_invited")] VideoChatParticipantsInvited,
+    ),
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -366,18 +363,6 @@ pub struct PassportData {}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ProximityAlertTriggered {}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct VideoChatScheduled {}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct VideoChatStarted {}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct VideoChatEnded {}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct VideoChatParticipantsInvited {}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct InlineKeyboardMarkup {}
