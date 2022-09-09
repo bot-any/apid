@@ -6,7 +6,10 @@
 //!
 //! ## Telegram Parity
 //!
-//! Current type definitions are written with August 12, 2022 (Bot API 6.2)
+//! Current type definitions are written for Bot API 6.2 (August 12, 2022)
+//!
+//! Warning:
+//! Currently, the crate  has lack of types and very WIP.
 
 #![warn(missing_docs)]
 
