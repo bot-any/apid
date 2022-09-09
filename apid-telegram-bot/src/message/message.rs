@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::{Chat, Poll, User};
+use crate::{Chat, MessageEntity, Poll, User};
 
 /// This object represents a message.
 #[derive(Debug, Serialize, Deserialize)]
@@ -296,9 +296,6 @@ pub enum MessageContent {
         video_chat_participants_invited: VideoChatParticipantsInvited,
     },
 }
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct MessageEntity {}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Animation {}
