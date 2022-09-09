@@ -15,12 +15,15 @@ pub struct User {
     first_name: String,
 
     /// User's or bot's last name
+    #[serde(skip_serializing_if = "Option::is_none")]
     last_name: Option<String>,
 
     /// User's or bot's username
+    #[serde(skip_serializing_if = "Option::is_none")]
     username: Option<String>,
 
     /// [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) of the user's language
+    #[serde(skip_serializing_if = "Option::is_none")]
     language_code: Option<String>,
 
     /// *True*, if this user is a Telegram Premium user

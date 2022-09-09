@@ -10,6 +10,7 @@ pub struct Message {
     /// Sender of the message; empty for messages sent to channels.
     /// For backward compatibility, the field contains a fake sender user in non-channel chats,
     /// if the message was sent on behalf of a chat.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub from: Option<User>,
 
     /// Sender of the message, sent on behalf of a chat.
@@ -19,6 +20,7 @@ pub struct Message {
     /// the linked channel for messages automatically forwarded to the discussion group.
     /// For backward compatibility, the field *from* contains a fake sender user in non-channel chats,
     /// if the message was sent on behalf of a chat.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub sender_chat: Option<Chat>,
 
     /// Date the message was sent in Unix time
@@ -28,21 +30,27 @@ pub struct Message {
     pub chat: Chat,
 
     /// For forwarded messages, sender of the original message
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub forward_from: Option<User>,
 
     /// For messages forwarded from channels or from anonymous administrators, information about the original sender chat
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub forward_from_chat: Option<Chat>,
 
     /// For messages forwarded from channels, identifier of the original message in the channel
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub forward_from_message_id: Option<i32>,
 
     /// For forwarded messages that were originally sent in channels or by an anonymous chat administrator, signature of the message sender if present
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub forward_signature: Option<String>,
 
     /// Sender's name for messages forwarded from users who disallow adding a link to their account in forwarded messages
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub forward_sender_name: Option<String>,
 
     /// For forwarded messages, date the original message was sent in Unix time
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub forward_date: Option<i32>,
 
     /// True, if the message is a channel post that was automatically forwarded to the connected discussion group
@@ -51,12 +59,15 @@ pub struct Message {
 
     /// For replies, the original message.
     /// Note that the Message object in this field will not contain further *reply_to_message* fields even if it itself is a reply.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub reply_to_message: Option<Box<Message>>,
 
     /// Bot through which the message was sent
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub via_bot: Option<User>,
 
     /// Date the message was last edited in Unix time
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub edit_date: Option<i32>,
 
     /// True, if the message can't be forwarded
@@ -64,18 +75,22 @@ pub struct Message {
     pub has_protected_content: bool,
 
     /// The unique identifier of a media message group this message belongs to
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub media_group_id: Option<String>,
 
     /// Signature of the post author for messages in channels, or the custom title of an anonymous group administrator
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub author_signature: Option<String>,
 
     #[serde(flatten)]
     pub content: MessageContent,
 
     /// Service message: data sent by a Web App
+    #[serde(skip_serializing_if = "Option::is_none")]
     web_app_data: Option<WebAppData>,
 
     /// Inline keyboard attached to the message. `login_url` buttons are represented as ordinary `url` buttons.
+    #[serde(skip_serializing_if = "Option::is_none")]
     reply_markup: Option<InlineKeyboardMarkup>,
 }
 
@@ -98,32 +113,32 @@ pub enum MessageContent {
         /// Message is a general file, information about the file
         document: Document,
 
-        #[serde(flatten)]
         /// Caption for the animation, audio, document, photo, video or voice
+        #[serde(flatten, skip_serializing_if = "Option::is_none")]
         caption: Option<CaptionBundle>,
     },
     Audio {
         /// Message is an audio file, information about the file
         audio: Audio,
 
-        #[serde(flatten)]
         /// Caption for the animation, audio, document, photo, video or voice
+        #[serde(flatten, skip_serializing_if = "Option::is_none")]
         caption: Option<CaptionBundle>,
     },
     Document {
         /// Message is a general file, information about the file
         document: Document,
 
-        #[serde(flatten)]
         /// Caption for the animation, audio, document, photo, video or voice
+        #[serde(flatten, skip_serializing_if = "Option::is_none")]
         caption: Option<CaptionBundle>,
     },
     Photo {
         /// Message is a photo, available sizes of the photo
         photo: Vec<PhotoSize>,
 
-        #[serde(flatten)]
         /// Caption for the animation, audio, document, photo, video or voice
+        #[serde(flatten, skip_serializing_if = "Option::is_none")]
         caption: Option<CaptionBundle>,
     },
     Sticker {
@@ -134,8 +149,8 @@ pub enum MessageContent {
         /// Message is a video, information about the video
         video: Video,
 
-        #[serde(flatten)]
         /// Caption for the animation, audio, document, photo, video or voice
+        #[serde(flatten, skip_serializing_if = "Option::is_none")]
         caption: Option<CaptionBundle>,
     },
     VideoNote {
@@ -146,8 +161,8 @@ pub enum MessageContent {
         /// Message is a voice message, information about the file
         voice: Voice,
 
-        #[serde(flatten)]
         /// Caption for the animation, audio, document, photo, video or voice
+        #[serde(flatten, skip_serializing_if = "Option::is_none")]
         caption: Option<CaptionBundle>,
     },
     Contact {
