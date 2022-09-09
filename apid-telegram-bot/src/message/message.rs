@@ -178,10 +178,8 @@ pub enum MessageContent {
         /// [More about games »](https://core.telegram.org/bots/api#games)
         game: Game,
     },
-    Poll {
-        /// Message is a native poll, information about the poll
-        poll: Poll,
-    },
+    /// Message is a native poll, information about the poll
+    Poll(#[serde(rename = "poll")] Poll),
     Venue {
         /// Message is a venue, information about the venue.
         /// For backward compatibility, when this field is set, the *location* field will also be set
