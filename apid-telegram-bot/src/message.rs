@@ -2,10 +2,6 @@ use serde::{Deserialize, Serialize};
 
 use crate::{Chat, Poll, User};
 
-fn is_false(value: &bool) -> bool {
-    *value == false
-}
-
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Message {
     /// Unique message identifier inside this chat
@@ -50,7 +46,7 @@ pub struct Message {
     pub forward_date: Option<i32>,
 
     /// True, if the message is a channel post that was automatically forwarded to the connected discussion group
-    #[serde(default, skip_serializing_if = "is_false")]
+    #[serde(default, skip_serializing_if = "crate::util::is_false")]
     pub is_automatic_forward: bool,
 
     /// For replies, the original message.
@@ -64,7 +60,7 @@ pub struct Message {
     pub edit_date: Option<i32>,
 
     /// True, if the message can't be forwarded
-    #[serde(default, skip_serializing_if = "is_false")]
+    #[serde(default, skip_serializing_if = "crate::util::is_false")]
     pub has_protected_content: bool,
 
     /// The unique identifier of a media message group this message belongs to
