@@ -3,6 +3,10 @@
 //! This crate provides types for Telegram API.
 //! The tpyes implementing [`Debug`], [`Serialize`](serde::Serialize) and [`Deserialize`](serde::Deserialize) traits for covenience.
 //! Also, carefully designed enum variants for ergonomics.
+//!
+//! ## Telegram Parity
+//!
+//! Current type definitions are written with August 12, 2022 (Bot API 6.2)
 
 #![warn(missing_docs)]
 
