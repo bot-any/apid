@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::{Chat, Contact, Dice, MessageEntity, Poll, User, WebAppData};
+use crate::{Chat, Contact, Dice, Game, MessageEntity, Poll, User, WebAppData};
 
 /// This object represents a message.
 #[derive(Debug, Serialize, Deserialize)]
@@ -171,17 +171,20 @@ pub enum MessageContent {
         #[serde(flatten, skip_serializing_if = "Option::is_none")]
         caption: Option<Caption>,
     },
+
     /// Message is a shared contact
     Contact(#[serde(rename = "contact")] Contact),
+
     /// Message is a dice with random value
     Dice(#[serde(rename = "dice")] Dice),
-    Game {
-        /// Message is a game, information about the game.
-        /// [More about games »](https://core.telegram.org/bots/api#games)
-        game: Game,
-    },
+
+    /// Message is a game.
+    /// [More about games »](https://core.telegram.org/bots/api#games)
+    Game(#[serde(rename = "game")] Game),
+
     /// Message is a native poll
     Poll(#[serde(rename = "poll")] Poll),
+
     Venue {
         /// Message is a venue, information about the venue.
         /// For backward compatibility, when this field is set, the *location* field will also be set
@@ -317,9 +320,6 @@ pub struct VideoNote {}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Voice {}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Game {}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Venue {}
