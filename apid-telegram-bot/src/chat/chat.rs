@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::Message;
+use crate::{ChatPhoto, Message};
 
 /// This object represents a chat.
 #[derive(Debug, Serialize, Deserialize)]
@@ -120,9 +120,6 @@ pub enum ChatKind {
     Supergroup,
     Channel,
 }
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct ChatPhoto {}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ChatPermissions {}
