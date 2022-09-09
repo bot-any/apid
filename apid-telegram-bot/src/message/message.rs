@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::{Chat, Dice, MessageEntity, Poll, User};
+use crate::{Chat, Contact, Dice, MessageEntity, Poll, User};
 
 /// This object represents a message.
 #[derive(Debug, Serialize, Deserialize)]
@@ -169,10 +169,8 @@ pub enum MessageContent {
         #[serde(flatten, skip_serializing_if = "Option::is_none")]
         caption: Option<Caption>,
     },
-    Contact {
-        /// Message is a shared contact, information about the contact
-        contact: Contact,
-    },
+    /// Message is a shared contact, information about the contact
+    Contact(#[serde(rename = "contact")] Contact),
     /// Message is a dice with random value
     Dice(#[serde(rename = "dice")] Dice),
     Game {
@@ -319,9 +317,6 @@ pub struct VideoNote {}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Voice {}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Contact {}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Game {}
