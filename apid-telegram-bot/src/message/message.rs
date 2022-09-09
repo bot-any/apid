@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::{Chat, Contact, Dice, Game, MessageEntity, Poll, User, WebAppData};
+use crate::{Chat, Contact, Dice, Game, MessageEntity, PhotoSize, Poll, User, WebAppData};
 
 /// This object represents a message.
 #[derive(Debug, Serialize, Deserialize)]
@@ -305,9 +305,6 @@ pub struct Audio {}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Document {}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct PhotoSize {}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Sticker {}
