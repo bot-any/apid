@@ -1,3 +1,5 @@
+//! This module contains types representing Telegram API objects.
+///
 pub use bot::*;
 pub use callback_query::*;
 pub use chat::*;
