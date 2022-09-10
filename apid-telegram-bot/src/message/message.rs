@@ -1,8 +1,8 @@
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    Animation, Chat, Contact, Dice, Game, MessageEntity, PhotoSize, Poll, User, VideoChatEnded,
-    VideoChatParticipantsInvited, VideoChatScheduled, VideoChatStarted, WebAppData,
+    Animation, Chat, Contact, Dice, Game, Location, MessageEntity, PhotoSize, Poll, User,
+    VideoChatEnded, VideoChatParticipantsInvited, VideoChatScheduled, VideoChatStarted, WebAppData,
 };
 
 /// This object represents a message.
@@ -342,9 +342,6 @@ pub struct Voice {}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Venue {}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Location {}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct MessageAutoDeleteTimerChanged {}
