@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::{ChatLocation, ChatPhoto, Message};
+use crate::{ChatKind, ChatLocation, ChatPhoto, Message};
 
 /// This object represents a chat.
 #[derive(Debug, Serialize, Deserialize)]
@@ -13,7 +13,7 @@ pub struct Chat {
 
     /// Type of chat,
     /// can be either “private”, “group”, “supergroup” or “channel”
-    #[serde(flatten)]
+    #[serde(rename = "type")]
     pub kind: ChatKind,
 
     /// Title, for supergroups, channels and group chats
@@ -26,7 +26,8 @@ pub struct Chat {
     #[serde(flatten)]
     pub chat_user: Option<ChatUser>,
 
-    /// Chat photo. Returned only in [getChat](https://core.telegram.org/bots/api#getchat).
+    /// Chat photo.
+    /// Returned only in [getChat](https://core.telegram.org/bots/api#getchat).
     pub photo: Option<ChatPhoto>,
 
     /// *True*, if privacy settings of the other party in the private chat allows to use `tg://user?id=<user_id>` links only in chats with the user.
@@ -108,22 +109,9 @@ pub struct ChatUser {
     /// Last name of the other party in a private chat
     pub last_name: Option<String>,
 
-    /// Bio of the other party in a private chat. Returned only in [getChat](https://core.telegram.org/bots/api#getchat).
+    /// Bio of the other party in a private chat.
+    /// Returned only in [getChat](https://core.telegram.org/bots/api#getchat).
     pub bio: Option<String>,
-}
-
-/// The kind of chat
-#[derive(Debug, Serialize, Deserialize)]
-#[serde(rename_all = "snake_case", tag = "type")]
-pub enum ChatKind {
-    /// Private chat
-    Private,
-    /// Group
-    Group,
-    /// Supergroup
-    Supergroup,
-    /// Channel
-    Channel,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

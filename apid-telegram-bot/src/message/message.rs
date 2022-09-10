@@ -95,7 +95,8 @@ pub struct Message {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub web_app_data: Option<WebAppData>,
 
-    /// Inline keyboard attached to the message. `login_url` buttons are represented as ordinary `url` buttons.
+    /// Inline keyboard attached to the message.
+    /// `login_url` buttons are represented as ordinary `url` buttons.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub reply_markup: Option<InlineKeyboardMarkup>,
 }
@@ -366,7 +367,8 @@ pub struct Caption {
     #[serde(rename = "caption")]
     pub text: String,
 
-    /// For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in the caption
+    /// For messages with a caption, special entities like usernames, URLs, bot commands, etc.
+    /// that appear in the caption
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub caption_entities: Vec<MessageEntity>,
 }

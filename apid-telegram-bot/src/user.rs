@@ -35,15 +35,18 @@ pub struct User {
     #[serde(default, skip_serializing_if = "crate::util::is_false")]
     pub added_to_attachment_menu: bool,
 
-    /// *True*, if the bot can be invited to groups. Returned only in [getMe](https://core.telegram.org/bots/api#getme).
+    /// *True*, if the bot can be invited to groups.
+    /// Returned only in [getMe](https://core.telegram.org/bots/api#getme).
     #[serde(default, skip_serializing_if = "crate::util::is_false")]
     pub can_join_groups: bool,
 
-    /// *True*, if privacy mode is disabled for the bot. Returned only in [getMe](https://core.telegram.org/bots/api#getme).
+    /// *True*, if privacy mode is disabled for the bot.
+    /// Returned only in [getMe](https://core.telegram.org/bots/api#getme).
     #[serde(default, skip_serializing_if = "crate::util::is_false")]
     pub can_read_all_group_messages: bool,
 
-    /// *True*, if the bot supports inline queries. Returned only in [getMe](https://core.telegram.org/bots/api#getme).
+    /// *True*, if the bot supports inline queries.
+    /// Returned only in [getMe](https://core.telegram.org/bots/api#getme).
     #[serde(default, skip_serializing_if = "crate::util::is_false")]
     pub supports_inline_queries: bool,
 }

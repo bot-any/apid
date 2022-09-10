@@ -2,7 +2,8 @@ use serde::{Deserialize, Serialize};
 
 use crate::User;
 
-/// This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.
+/// This object represents one special entity in a text message.
+/// For example, hashtags, usernames, URLs, etc.
 #[derive(Debug, Serialize, Deserialize)]
 pub struct MessageEntity {
     /// The kind of message entity, and its metadata
@@ -67,7 +68,8 @@ pub enum MessageEntityKind {
     },
     /// for inline custom emoji stickers
     CustomEmoji {
-        /// For “custom_emoji” only, unique identifier of the custom emoji. Use getCustomEmojiStickers to get full information about the sticker
+        /// For “custom_emoji” only, unique identifier of the custom emoji.
+        /// Use getCustomEmojiStickers to get full information about the sticker
         custom_emoji_id: String,
     },
 }

@@ -50,10 +50,12 @@ pub enum UpdateEvent {
     /// New incoming callback query
     CallbackQuery(#[serde(rename = "callback_query")] CallbackQuery),
 
-    /// New incoming shipping query. Only for invoices with flexible price
+    /// New incoming shipping query.
+    /// Only for invoices with flexible price
     ShippingQuery(#[serde(rename = "shipping_query")] ShippingQuery),
 
-    /// New incoming pre-checkout query. Contains full information about checkout
+    /// New incoming pre-checkout query.
+    /// Contains full information about checkout
     PreCheckoutQuery(#[serde(rename = "pre_checkout_query")] PreCheckoutQuery),
 
     /// New poll state.
