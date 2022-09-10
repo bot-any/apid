@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::User;
+use crate::types::User;
 
 /// This object represents a service message about a video chat scheduled in the chat.
 #[derive(Debug, Serialize, Deserialize)]

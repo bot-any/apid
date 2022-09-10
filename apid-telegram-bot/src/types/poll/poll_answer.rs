@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::User;
+use crate::types::User;
 
 /// This object represents an answer of a user in a non-anonymous poll.
 #[derive(Debug, Serialize, Deserialize)]

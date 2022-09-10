@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::Location;
+use crate::types::Location;
 
 /// Represents a location to which a chat is connected.
 #[derive(Debug, Serialize, Deserialize)]

@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::{MessageEntity, PollOption};
+use crate::types::{MessageEntity, PollOption};
 
 /// This object contains information about a poll.
 #[derive(Debug, Serialize, Deserialize)]

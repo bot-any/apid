@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::{
+use crate::types::{
     Animation, Chat, Contact, Dice, Game, Location, MessageAutoDeleteTimerChanged, MessageEntity,
     PhotoSize, Poll, User, VideoChatEnded, VideoChatParticipantsInvited, VideoChatScheduled,
     VideoChatStarted, WebAppData,

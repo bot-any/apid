@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::User;
+use crate::types::User;
 
 /// This object represents one special entity in a text message.
 /// For example, hashtags, usernames, URLs, etc.
@@ -49,7 +49,7 @@ pub enum MessageEntityKind {
     Spoiler,
     /// `monowidth string`
     Code,
-    /// ```
+    /// ```text
     /// monowidth block
     /// ```
     Pre {

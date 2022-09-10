@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::{ChatKind, ChatLocation, ChatPhoto, Message};
+use crate::types::{ChatKind, ChatLocation, ChatPhoto, Message};
 
 /// This object represents a chat.
 #[derive(Debug, Serialize, Deserialize)]
