@@ -24,7 +24,7 @@ pub struct Chat {
 
     /// The user chat with in a private chat
     #[serde(flatten)]
-    pub chat_user: ChatUser,
+    pub chat_user: Option<ChatUser>,
 
     /// Chat photo. Returned only in [getChat](https://core.telegram.org/bots/api#getchat).
     pub photo: Option<ChatPhoto>,
