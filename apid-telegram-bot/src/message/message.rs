@@ -1,8 +1,9 @@
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    Animation, Chat, Contact, Dice, Game, Location, MessageEntity, PhotoSize, Poll, User,
-    VideoChatEnded, VideoChatParticipantsInvited, VideoChatScheduled, VideoChatStarted, WebAppData,
+    Animation, Chat, Contact, Dice, Game, Location, MessageAutoDeleteTimerChanged, MessageEntity,
+    PhotoSize, Poll, User, VideoChatEnded, VideoChatParticipantsInvited, VideoChatScheduled,
+    VideoChatStarted, WebAppData,
 };
 
 /// This object represents a message.
@@ -255,10 +256,10 @@ pub enum MessageContent {
         channel_chat_created: bool,
     },
 
-    MessageAutoDeleteTimerChanged {
-        /// Service message: auto-delete timer settings changed in the chat
-        message_auto_delete_timer_changed: MessageAutoDeleteTimerChanged,
-    },
+    /// Service message: auto-delete timer settings changed in the chat
+    MessageAutoDeleteTimerChanged(
+        #[serde(rename = "message_auto_delete_timer_changed")] MessageAutoDeleteTimerChanged,
+    ),
 
     MigrateToChatId {
         /// The group has been migrated to a supergroup with the specified identifier.
@@ -342,9 +343,6 @@ pub struct Voice {}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Venue {}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct MessageAutoDeleteTimerChanged {}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Invoice {}
