@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    Chat, Contact, Dice, Game, MessageEntity, PhotoSize, Poll, User, VideoChatEnded,
+    Animation, Chat, Contact, Dice, Game, MessageEntity, PhotoSize, Poll, User, VideoChatEnded,
     VideoChatParticipantsInvited, VideoChatScheduled, VideoChatStarted, WebAppData,
 };
 
@@ -321,9 +321,6 @@ pub enum MessageContent {
         #[serde(rename = "video_chat_participants_invited")] VideoChatParticipantsInvited,
     ),
 }
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Animation {}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Audio {}
