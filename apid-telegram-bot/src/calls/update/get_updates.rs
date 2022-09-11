@@ -1,6 +1,7 @@
+use apid::Call;
 use serde::{Deserialize, Serialize};
 
-use crate::types::UpdateKind;
+use crate::types::{Update, UpdateKind};
 
 /// Use this method to receive incoming updates using long polling ([wiki](https://en.wikipedia.org/wiki/Push_technology#Long_polling)).
 /// Returns an Array of [`Update`](`crate::types::Update`) objects.
@@ -36,4 +37,8 @@ pub struct GetUpdates {
     /// Please note that this parameter doesn't affect updates created before the call to the getUpdates, so unwanted updates may be received for a short period of time.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub allowed_updates: Option<Vec<UpdateKind>>,
+}
+
+impl Call for GetUpdates {
+    type Response = Vec<Update>;
 }

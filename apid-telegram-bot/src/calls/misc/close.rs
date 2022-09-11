@@ -1,3 +1,4 @@
+use apid::Call;
 use serde::{Deserialize, Serialize};
 
 /// Use this method to close the bot instance before moving it from one local server to another.
@@ -7,3 +8,7 @@ use serde::{Deserialize, Serialize};
 /// Requires no parameters.
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Close {}
+
+impl Call for Close {
+    type Response = bool;
+}

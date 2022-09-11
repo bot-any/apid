@@ -1,3 +1,4 @@
+use apid::Call;
 use serde::{Deserialize, Serialize};
 
 /// Use this method to log out from the cloud Bot API server before launching the bot locally.
@@ -7,3 +8,7 @@ use serde::{Deserialize, Serialize};
 /// Requires no parameters.
 #[derive(Debug, Serialize, Deserialize)]
 pub struct LogOut {}
+
+impl Call for LogOut {
+    type Response = bool;
+}
