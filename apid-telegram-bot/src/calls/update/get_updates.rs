@@ -5,7 +5,7 @@ use crate::types::{Update, UpdateKind};
 
 /// Use this method to receive incoming updates using long polling ([wiki](https://en.wikipedia.org/wiki/Push_technology#Long_polling)).
 /// Returns an Array of [`Update`] objects.
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct GetUpdates {
     /// Identifier of the first update to be returned.
     /// Must be greater by one than the highest among the identifiers of previously received updates.

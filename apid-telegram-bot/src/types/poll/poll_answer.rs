@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use crate::types::User;
 
 /// This object represents an answer of a user in a non-anonymous poll.
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct PollAnswer {
     /// Unique poll identifier
     pub poll_id: String,

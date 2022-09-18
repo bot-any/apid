@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use crate::types::PhotoSize;
 
 /// This object represents an animation file (GIF or H.264/MPEG-4 AVC video without sound).
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct Animation {
     /// Identifier for this file, which can be used to download or reuse the file
     pub file_id: String,

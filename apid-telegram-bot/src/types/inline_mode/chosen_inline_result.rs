@@ -5,7 +5,7 @@ use crate::types::{Location, User};
 /// Represents a [result](https://core.telegram.org/bots/api#inlinequeryresult) of an inline query that was chosen by the user and sent to their chat partner.
 ///
 /// **Note**: It is necessary to enable [inline feedback](https://core.telegram.org/bots/inline#collecting-feedback) via [@BotFather](https://t.me/botfather) in order to receive these objects in updates.
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct ChosenInlineResult {
     /// The unique identifier for the result that was chosen
     pub result_id: String,

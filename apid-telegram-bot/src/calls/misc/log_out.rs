@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 /// After a successful call, you can immediately log in on a local server, but will not be able to log in back to the cloud Bot API server for 10 minutes.
 /// Returns *True* on success.
 /// Requires no parameters.
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct LogOut {}
 
 impl Call for LogOut {

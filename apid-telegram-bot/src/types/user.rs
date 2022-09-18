@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 /// This object represents a Telegram user or bot.
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct User {
     /// Unique identifier for this user or bot.
     ///

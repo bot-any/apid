@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 /// The chat id either an integer or a string
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ChatId {
     /// The integer chat id

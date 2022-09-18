@@ -27,10 +27,10 @@ macro_rules! impl_serde_bool_const {
     };
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub struct True;
 impl_serde_bool_const!(true, True);
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub struct False;
 impl_serde_bool_const!(false, False);

@@ -4,7 +4,7 @@ use crate::types::{ChatKind, Location, User};
 
 /// This object represents an incoming inline query.
 /// When the user sends an empty query, your bot could return some default or trending results.
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct InlineQuery {
     /// Unique identifier for this query
     pub id: String,
@@ -27,4 +27,3 @@ pub struct InlineQuery {
     /// Sender location, only for bots that request user location
     pub location: Option<Location>,
 }
-

@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 /// This object represents an animated emoji that displays a random value.
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct Dice {
     /// Emoji on which the dice throw animation is based
     pub emoji: String,

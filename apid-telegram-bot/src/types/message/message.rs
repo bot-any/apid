@@ -7,7 +7,7 @@ use crate::types::{
 };
 
 /// This object represents a message.
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct Message {
     /// Unique message identifier inside this chat
     pub message_id: i32,
@@ -102,7 +102,7 @@ pub struct Message {
 }
 
 /// The object representing message content
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum MessageContent {
     /// Message is a text message
@@ -160,7 +160,7 @@ pub enum MessageContent {
     },
 
     /// Message is a sticker
-    Sticker(#[serde(rename = "sticker")] Sticker),
+    Sticker { sticker: Sticker },
 
     /// Message is a video
     Video {
@@ -173,7 +173,7 @@ pub enum MessageContent {
     },
 
     /// Message is a [video note](https://telegram.org/blog/video-messages-and-telescope)
-    VideoNote(#[serde(rename = "video_note")] VideoNote),
+    VideoNote { video_note: VideoNote },
 
     /// Message is a voice message
     Voice {
@@ -186,17 +186,17 @@ pub enum MessageContent {
     },
 
     /// Message is a shared contact
-    Contact(#[serde(rename = "contact")] Contact),
+    Contact { contact: Contact },
 
     /// Message is a dice with random value
-    Dice(#[serde(rename = "dice")] Dice),
+    Dice { dice: Dice },
 
     /// Message is a game.
     /// [More about games »](https://core.telegram.org/bots/api#games)
-    Game(#[serde(rename = "game")] Game),
+    Game { game: Game },
 
     /// Message is a native poll
-    Poll(#[serde(rename = "poll")] Poll),
+    Poll { poll: Poll },
 
     /// Message is a venue.
     Venue {
@@ -209,7 +209,7 @@ pub enum MessageContent {
     },
 
     /// Message is a shared location
-    Location(#[serde(rename = "location")] Location),
+    Location { location: Location },
 
     NewChatMembers {
         /// New members that were added to the group or supergroup and information about them (the bot itself may be one of these members)
@@ -232,28 +232,50 @@ pub enum MessageContent {
     },
 
     /// Service message: the chat photo was deleted
-    DeleteChatPhoto(#[serde(rename = "delete_chat_photo")] True),
+    DeleteChatPhoto {
+        /// Service message: the chat photo was deleted
+        delete_chat_photo: True,
+    },
 
     /// Service message: the group has been created
-    GroupChatCreated(#[serde(rename = "group_chat_created")] True),
+    GroupChatCreated {
+        /// Service message: the group has been created
+        group_chat_created: True,
+    },
 
     /// Service message: the supergroup has been created.
     /// This field can't be received in a message coming through updates,
     /// because bot can't be a member of a supergroup when it is created.
     /// It can only be found in reply_to_message if someone replies to a very first message in a directly created supergroup.
-    SupergroupChatCreated(#[serde(rename = "supergroup_chat_created")] True),
+    SupergroupChatCreated {
+        /// Service message: the supergroup has been created.
+        /// This field can't be received in a message coming through updates,
+        /// because bot can't be a member of a supergroup when it is created.
+        /// It can only be found in reply_to_message if someone replies to a very first message in a directly created supergroup.
+        supergroup_chat_created: True,
+    },
 
     /// Service message: the channel has been created.
     /// This field can't be received in a message coming through updates,
     /// because bot can't be a member of a channel when it is created.
     /// It can only be found in reply_to_message if someone replies to a very first message in a channel.
-    ChannelChatCreated(#[serde(rename = "channel_chat_created")] True),
+    ChannelChatCreated {
+        /// Service message: the channel has been created.
+        /// This field can't be received in a message coming through updates,
+        /// because bot can't be a member of a channel when it is created.
+        /// It can only be found in reply_to_message if someone replies to a very first message in a channel.
+        channel_chat_created: True,
+    },
 
     /// Service message: auto-delete timer settings changed in the chat
-    MessageAutoDeleteTimerChanged(
-        #[serde(rename = "message_auto_delete_timer_changed")] MessageAutoDeleteTimerChanged,
-    ),
+    MessageAutoDeleteTimerChanged {
+        /// Service message: auto-delete timer settings changed in the chat
+        message_auto_delete_timer_changed: MessageAutoDeleteTimerChanged,
+    },
 
+    /// The group has been migrated to a supergroup with the specified identifier.
+    /// This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it.
+    /// But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.
     MigrateToChatId {
         /// The group has been migrated to a supergroup with the specified identifier.
         /// This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it.
@@ -261,6 +283,9 @@ pub enum MessageContent {
         migrate_to_chat_id: i64,
     },
 
+    /// The supergroup has been migrated from a group with the specified identifier.
+    /// This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it.
+    /// But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.
     MigrateFromChatId {
         /// The supergroup has been migrated from a group with the specified identifier.
         /// This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it.
@@ -268,18 +293,24 @@ pub enum MessageContent {
         migrate_from_chat_id: i64,
     },
 
+    /// Specified message was pinned.
+    /// Note that the Message object in this field will not contain further *reply_to_message* fields even if it is itself a reply.
     PinnedMessage {
         /// Specified message was pinned.
         /// Note that the Message object in this field will not contain further *reply_to_message* fields even if it is itself a reply.
         pinned_message: Box<Message>,
     },
 
+    /// Message is an invoice for a [payment](https://core.telegram.org/bots/api#payments), information about the invoice.
+    /// [More about payments »](https://core.telegram.org/bots/api#payments)
     Invoice {
         /// Message is an invoice for a [payment](https://core.telegram.org/bots/api#payments), information about the invoice.
         /// [More about payments »](https://core.telegram.org/bots/api#payments)
         invoice: Invoice,
     },
 
+    /// Message is a service message about a successful payment, information about the payment.
+    /// [More about payments »](https://core.telegram.org/bots/api#payments)
     SuccessfulPayment {
         /// Message is a service message about a successful payment, information about the payment.
         /// [More about payments »](https://core.telegram.org/bots/api#payments)
@@ -295,6 +326,8 @@ pub enum MessageContent {
         passport_data: PassportData,
     },
 
+    /// Service message.
+    /// A user in the chat triggered another user's proximity alert while sharing Live Location.
     ProximityAlertTriggered {
         /// Service message.
         /// A user in the chat triggered another user's proximity alert while sharing Live Location.
@@ -302,58 +335,104 @@ pub enum MessageContent {
     },
 
     /// Service message: video chat scheduled
-    VideoChatScheduled(#[serde(rename = "video_chat_scheduled")] VideoChatScheduled),
+    VideoChatScheduled {
+        /// Service message: video chat scheduled
+        video_chat_scheduled: VideoChatScheduled,
+    },
 
     /// Service message: video chat started
-    VideoChatStarted(#[serde(rename = "video_chat_started")] VideoChatStarted),
+    VideoChatStarted {
+        /// Service message: video chat started
+        video_chat_started: VideoChatStarted,
+    },
 
     /// Service message: video chat ended
-    VideoChatEnded(#[serde(rename = "video_chat_ended")] VideoChatEnded),
+    VideoChatEnded {
+        /// Service message: video chat ended
+        video_chat_ended: VideoChatEnded,
+    },
 
     /// Service message: new participants invited to a video chat
-    VideoChatParticipantsInvited(
-        #[serde(rename = "video_chat_participants_invited")] VideoChatParticipantsInvited,
-    ),
+    VideoChatParticipantsInvited {
+        /// Service message: new participants invited to a video chat
+        video_chat_participants_invited: VideoChatParticipantsInvited,
+    },
 }
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Audio {}
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub struct Audio {
+    // TODO:
+    __never_happen: String,
+}
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Document {}
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub struct Document {
+    // TODO:
+    __never_happen: String,
+}
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Sticker {}
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub struct Sticker {
+    // TODO:
+    __never_happen: String,
+}
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Video {}
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub struct Video {
+    // TODO:
+    __never_happen: String,
+}
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct VideoNote {}
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub struct VideoNote {
+    // TODO:
+    __never_happen: String,
+}
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Voice {}
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub struct Voice {
+    // TODO:
+    __never_happen: String,
+}
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Venue {}
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub struct Venue {
+    // TODO:
+    __never_happen: String,
+}
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Invoice {}
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub struct Invoice {
+    // TODO:
+    __never_happen: String,
+}
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct SuccessfulPayment {}
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub struct SuccessfulPayment {
+    // TODO:
+    __never_happen: String,
+}
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct PassportData {}
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub struct PassportData {
+    // TODO:
+    __never_happen: String,
+}
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct ProximityAlertTriggered {}
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub struct ProximityAlertTriggered {
+    // TODO:
+    __never_happen: String,
+}
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct InlineKeyboardMarkup {}
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub struct InlineKeyboardMarkup {
+    // TODO:
+    __never_happen: String,
+}
 
 /// Caption for the animation, audio, document, photo, video or voice
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct Caption {
     /// Caption text
     #[serde(rename = "caption")]

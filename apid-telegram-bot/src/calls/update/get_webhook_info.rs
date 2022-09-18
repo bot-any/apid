@@ -7,7 +7,7 @@ use crate::types::WebhookInfo;
 /// Requires no parameters.
 /// On success, returns a [`WebhookInfo`] object.
 /// If the bot is using getUpdates, will return an object with the url field empty.
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct GetWebhookInfo {}
 
 impl Call for GetWebhookInfo {

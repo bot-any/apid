@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use crate::types::Location;
 
 /// Represents a location to which a chat is connected.
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct ChatLocation {
     /// The location to which the supergroup is connected.
     /// Can't be a live location.

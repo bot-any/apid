@@ -1,4 +1,7 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Game {}
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub struct Game {
+    // TODO:
+    __never_happen: String,
+}

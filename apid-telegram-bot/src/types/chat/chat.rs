@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use crate::types::{ChatKind, ChatLocation, ChatPhoto, Message};
 
 /// This object represents a chat.
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct Chat {
     /// Unique identifier for this chat.
     ///
@@ -101,7 +101,7 @@ pub struct Chat {
 }
 
 /// This object respresents an information about user from private chat
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct ChatUser {
     /// First name of the other party in a private chat
     pub first_name: String,
@@ -114,5 +114,5 @@ pub struct ChatUser {
     pub bio: Option<String>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct ChatPermissions {}

@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 /// This object represents a phone contact.
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct Contact {
     /// Contact's phone number
     pub phone_number: String,

@@ -9,7 +9,7 @@ use serde::{Deserialize, Serialize};
 /// Telegram apps support these buttons as of version 5.7.
 ///
 /// > Sample bot: [@discussbot](https://t.me/discussbot)
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct LoginUrl {
     /// An HTTPS URL to be opened with user authorization data added to the query string when the button is pressed.
     /// If the user refuses to provide authorization data, the original URL without information about the user will be opened.

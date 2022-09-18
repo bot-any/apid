@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 /// The method will return error 429 in the first 10 minutes after the bot is launched.
 /// Returns *True* on success.
 /// Requires no parameters.
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct Close {}
 
 impl Call for Close {

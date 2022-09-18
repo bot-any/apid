@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use crate::types::{MessageEntity, PollOption};
 
 /// This object contains information about a poll.
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct Poll {
     /// Unique poll identifier
     pub id: String,
@@ -38,7 +38,7 @@ pub struct Poll {
 }
 
 /// The kind of poll
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case", tag = "type")]
 pub enum PollKind {
     /// The regular poll

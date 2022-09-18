@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use crate::types::ChatId;
 
 /// This object represents the scope to which bot commands are applied.
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case", tag = "type")]
 pub enum BotCommandScope {
     /// Represents the default [scope](https://core.telegram.org/bots/api#botcommandscope) of bot commands.

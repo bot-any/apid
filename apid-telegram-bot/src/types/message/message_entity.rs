@@ -4,9 +4,10 @@ use crate::types::User;
 
 /// This object represents one special entity in a text message.
 /// For example, hashtags, usernames, URLs, etc.
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct MessageEntity {
     /// The kind of message entity, and its metadata
+    #[serde(flatten)]
     pub kind: MessageEntityKind,
     /// Offset in UTF-16 code units to the start of the entity
     pub offset: i32,
@@ -15,7 +16,7 @@ pub struct MessageEntity {
 }
 
 /// This object represents the kind of message entity, and its metadata.
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case", tag = "type")]
 pub enum MessageEntityKind {
     /// `@username`
