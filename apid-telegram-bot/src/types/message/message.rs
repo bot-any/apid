@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::types::{
     Animation, Chat, Contact, Dice, Game, Location, MessageAutoDeleteTimerChanged, MessageEntity,
-    PhotoSize, Poll, User, VideoChatEnded, VideoChatParticipantsInvited, VideoChatScheduled,
+    PhotoSize, Poll, True, User, VideoChatEnded, VideoChatParticipantsInvited, VideoChatScheduled,
     VideoChatStarted, WebAppData,
 };
 
@@ -231,31 +231,23 @@ pub enum MessageContent {
         new_chat_photo: Vec<PhotoSize>,
     },
 
-    DeleteChatPhoto {
-        /// Service message: the chat photo was deleted
-        delete_chat_photo: bool,
-    },
+    /// Service message: the chat photo was deleted
+    DeleteChatPhoto(#[serde(rename = "delete_chat_photo")] True),
 
-    GroupChatCreated {
-        /// Service message: the group has been created
-        group_chat_created: bool,
-    },
+    /// Service message: the group has been created
+    GroupChatCreated(#[serde(rename = "group_chat_created")] True),
 
-    SupergroupChatCreated {
-        /// Service message: the supergroup has been created.
-        /// This field can't be received in a message coming through updates,
-        /// because bot can't be a member of a supergroup when it is created.
-        /// It can only be found in reply_to_message if someone replies to a very first message in a directly created supergroup.
-        supergroup_chat_created: bool,
-    },
+    /// Service message: the supergroup has been created.
+    /// This field can't be received in a message coming through updates,
+    /// because bot can't be a member of a supergroup when it is created.
+    /// It can only be found in reply_to_message if someone replies to a very first message in a directly created supergroup.
+    SupergroupChatCreated(#[serde(rename = "supergroup_chat_created")] True),
 
-    ChannelChatCreated {
-        /// Service message: the channel has been created.
-        /// This field can't be received in a message coming through updates,
-        /// because bot can't be a member of a channel when it is created.
-        /// It can only be found in reply_to_message if someone replies to a very first message in a channel.
-        channel_chat_created: bool,
-    },
+    /// Service message: the channel has been created.
+    /// This field can't be received in a message coming through updates,
+    /// because bot can't be a member of a channel when it is created.
+    /// It can only be found in reply_to_message if someone replies to a very first message in a channel.
+    ChannelChatCreated(#[serde(rename = "channel_chat_created")] True),
 
     /// Service message: auto-delete timer settings changed in the chat
     MessageAutoDeleteTimerChanged(

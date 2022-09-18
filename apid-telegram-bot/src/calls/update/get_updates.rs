@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 use crate::types::{Update, UpdateKind};
 
 /// Use this method to receive incoming updates using long polling ([wiki](https://en.wikipedia.org/wiki/Push_technology#Long_polling)).
-/// Returns an Array of [`Update`](`crate::types::Update`) objects.
+/// Returns an Array of [`Update`] objects.
 #[derive(Debug, Serialize, Deserialize)]
 pub struct GetUpdates {
     /// Identifier of the first update to be returned.
@@ -30,7 +30,7 @@ pub struct GetUpdates {
 
     /// A JSON-serialized list of the update types you want your bot to receive.
     /// For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types.
-    /// See [`UpdateKind`](`crate::types::UpdateKind`) for a complete list of available update types.
+    /// See [`UpdateKind`] for a complete list of available update types.
     /// Specify an empty list to receive all update types except *chat_member* (default).
     /// If not specified, the previous setting will be used.
     ///

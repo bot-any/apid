@@ -1,4 +1,5 @@
 //! This module contains types representing Telegram API objects.
+pub use bool_const::*;
 ///
 pub use bot::*;
 pub use callback_query::*;
@@ -18,6 +19,7 @@ pub use user::*;
 pub use web_app::*;
 pub use webhook_info::*;
 
+mod bool_const;
 mod bot;
 mod callback_query;
 mod chat;

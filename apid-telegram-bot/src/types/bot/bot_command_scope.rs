@@ -1,5 +1,7 @@
 use serde::{Deserialize, Serialize};
 
+use crate::types::ChatId;
+
 /// This object represents the scope to which bot commands are applied.
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case", tag = "type")]
@@ -36,26 +38,4 @@ pub enum BotCommandScope {
         /// Unique identifier of the target user
         user_id: i64,
     },
-}
-
-/// The chat id either an integer or a string
-#[derive(Debug, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum ChatId {
-    /// The integer chat id
-    Int(i64),
-    /// The string chat id in the format of `@supergroupusername`
-    String(String),
-}
-
-impl From<i64> for ChatId {
-    fn from(value: i64) -> Self {
-        ChatId::Int(value)
-    }
-}
-
-impl From<String> for ChatId {
-    fn from(value: String) -> Self {
-        ChatId::String(value)
-    }
 }
