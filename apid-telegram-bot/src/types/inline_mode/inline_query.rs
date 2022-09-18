@@ -28,5 +28,3 @@ pub struct InlineQuery {
     pub location: Option<Location>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct ChosenInlineResult {}
